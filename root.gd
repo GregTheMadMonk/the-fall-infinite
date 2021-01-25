@@ -22,10 +22,17 @@ var sounds_enabled = true
 
 var sounds = []
 
+var new_hit = true
+
 func _ready():
 	# initialize RNG
 	random = RandomNumberGenerator.new()
 	random.randomize()
+	
+	# HTML5 version won't have DOF
+	if OS.get_name() == "HTML5":
+		$player_root/camera_root/camera_pitch/viewport/hud/left/enable_dof.disabled = true
+		$player_root/camera_root/camera_pitch/viewport/hud/left/enable_dof.pressed = false
 	
 	# load sounds
 	var audio = Directory.new()
@@ -85,17 +92,21 @@ func _process(delta):
 	# projects Steve half-height on staricase normal to get effective collision distance
 	var eff_dist = 1.7 * abs($player_root/steve.transform.basis.y.dot(Vector3(0, 1, -1))) / sqrt(2) + sqrt(2)
 	if dist <= eff_dist:
-		vel = random.randf_range(10, bounseiness * 10)
-		print("Hit!")
-		if (sounds.size() != 0) && sounds_enabled && !$player.playing:
-			$player.stream = sounds[random.randi_range(0, sounds.size() - 1)]
-			$player.play()
-		vel_tangent = random.randf_range(10, 20)
-		spin_speed = random.randf_range(6, 12)
-		spin.x = -random.randf_range(10, 100)
-		spin.y = random.randf_range(0.01, 10)
-		spin.z = random.randf_range(0.01, 10)
-		spin = spin.normalized()
+		if new_hit:
+			new_hit = false
+			vel = random.randf_range(10, bounseiness * 10)
+			print("Hit!")
+			if (sounds.size() != 0) && sounds_enabled:
+				$player.stream = sounds[random.randi_range(0, sounds.size() - 1)]
+				$player.play()
+			vel_tangent = random.randf_range(10, 20)
+			spin_speed = random.randf_range(6, 12)
+			spin.x = -random.randf_range(10, 100)
+			spin.y = random.randf_range(0.01, 10)
+			spin.z = random.randf_range(0.01, 10)
+			spin = spin.normalized()
+	elif !new_hit:
+		new_hit = true
 	
 func _input(event):
 	if event is InputEventMouseMotion && !viewport_locked:
