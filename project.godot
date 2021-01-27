@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="The Fall: Infinite"
-run/main_scene="res://starter.tscn"
+run/main_scene="res://scenes/starter.tscn"
 config/icon="res://icon.png"
 
 [rendering]

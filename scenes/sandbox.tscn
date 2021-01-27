@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/game.gd" type="Script" id=1]
+[ext_resource path="res://scenes/staircase_root.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/title_card.tscn" type="PackedScene" id=4]
+[ext_resource path="res://env.tres" type="Environment" id=5]
+[ext_resource path="res://scenes/hud_sandbox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/third_person_camera.tscn" type="PackedScene" id=7]
+
+[node name="root" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="player_root" parent="." instance=ExtResource( 3 )]
+
+[node name="camera_root" parent="player_root" instance=ExtResource( 7 )]
+
+[node name="player" type="AudioStreamPlayer" parent="."]
+
+[node name="env" type="WorldEnvironment" parent="."]
+environment = ExtResource( 5 )
+
+[node name="sun" type="DirectionalLight" parent="."]
+transform = Transform( 0.931055, -0.34298, -0.124499, -0.087772, -0.541716, 0.835967, -0.354163, -0.767404, -0.534472, 0, 0, 0 )
+shadow_enabled = true
+
+[node name="stairs_root" parent="." instance=ExtResource( 2 )]
+
+[node name="title" parent="." instance=ExtResource( 4 )]
+
+[node name="hud" parent="." instance=ExtResource( 6 )]
+visible = false

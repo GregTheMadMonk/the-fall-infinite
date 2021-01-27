@@ -1,0 +1,145 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/font/DynamicFont_Ubuntu.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/hud_sandbox.gd" type="Script" id=2]
+
+[node name="hud" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="VBoxContainer" parent="."]
+anchor_right = 0.3
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sensitivity_caption" type="Label" parent="left"]
+margin_right = 297.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 1 )
+text = "Sensitivity [1.0]"
+
+[node name="sensitivity_slider" type="HSlider" parent="left"]
+margin_top = 27.0
+margin_right = 297.0
+margin_bottom = 43.0
+min_value = 0.1
+max_value = 5.0
+step = 0.01
+value = 1.0
+
+[node name="timescale_label" type="Label" parent="left"]
+margin_top = 47.0
+margin_right = 297.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 1 )
+text = "Time scale [1.0]"
+
+[node name="timescale_slider" type="HSlider" parent="left"]
+margin_top = 74.0
+margin_right = 297.0
+margin_bottom = 90.0
+min_value = 0.1
+max_value = 10.0
+step = 0.1
+value = 1.0
+
+[node name="bounsieness_label" type="Label" parent="left"]
+margin_top = 94.0
+margin_right = 297.0
+margin_bottom = 117.0
+custom_fonts/font = ExtResource( 1 )
+text = "Bounceiness [1.0]"
+
+[node name="bounseiness_slider" type="HSlider" parent="left"]
+margin_top = 121.0
+margin_right = 297.0
+margin_bottom = 137.0
+min_value = 1.0
+max_value = 25.0
+step = 0.1
+value = 1.0
+
+[node name="enable_dof" type="CheckButton" parent="left"]
+margin_top = 141.0
+margin_right = 297.0
+margin_bottom = 181.0
+custom_fonts/font = ExtResource( 1 )
+pressed = true
+text = "Enable DOF"
+
+[node name="enable_sounds" type="CheckButton" parent="left"]
+margin_top = 185.0
+margin_right = 297.0
+margin_bottom = 225.0
+custom_fonts/font = ExtResource( 1 )
+pressed = true
+text = "Enable Sounds"
+
+[node name="env_label" type="Label" parent="left"]
+margin_top = 229.0
+margin_right = 297.0
+margin_bottom = 252.0
+custom_fonts/font = ExtResource( 1 )
+text = "Environment"
+
+[node name="env_selectors" type="HBoxContainer" parent="left"]
+margin_top = 256.0
+margin_right = 297.0
+margin_bottom = 276.0
+
+[node name="env_overworld" type="Button" parent="left/env_selectors"]
+margin_right = 96.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Overworld"
+
+[node name="env_nether" type="Button" parent="left/env_selectors"]
+margin_left = 100.0
+margin_right = 196.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Nether"
+
+[node name="env_end" type="Button" parent="left/env_selectors"]
+margin_left = 200.0
+margin_right = 297.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "End"
+
+[node name="right" type="VBoxContainer" parent="."]
+anchor_left = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="controls" type="Label" parent="right"]
+margin_right = 297.0
+margin_bottom = 75.0
+custom_fonts/font = ExtResource( 1 )
+text = "MOUSE2 - Toggle these settings
+MOUSE1 - Toggle mouse lock
+MOUSE Wheel - Zoom"
+align = 2
+[connection signal="value_changed" from="left/sensitivity_slider" to="." method="_on_sensitivity_slider_value_changed"]
+[connection signal="value_changed" from="left/timescale_slider" to="." method="_on_timescale_slider_value_changed"]
+[connection signal="value_changed" from="left/bounseiness_slider" to="." method="_on_bounseiness_slider_value_changed"]
+[connection signal="toggled" from="left/enable_dof" to="." method="_on_enable_dof_toggled"]
+[connection signal="toggled" from="left/enable_sounds" to="." method="_on_enable_sounds_toggled"]
+[connection signal="pressed" from="left/env_selectors/env_overworld" to="." method="_on_env_overworld_pressed"]
+[connection signal="pressed" from="left/env_selectors/env_nether" to="." method="_on_env_nether_pressed"]
+[connection signal="pressed" from="left/env_selectors/env_end" to="." method="_on_env_end_pressed"]
