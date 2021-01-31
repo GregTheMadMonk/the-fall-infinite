@@ -1,6 +1,6 @@
 extends Spatial
 
-const needs = [ "root", "rand" ]
+const needs = [ "root", "rand", "stairs" ]
 var nodes = Dictionary()
 
 var bounseiness = 1			# bounce higher limit multiplier
@@ -26,6 +26,10 @@ func _process(delta):
 	# moving stairs continiously
 	while tangent >= 2:
 		tangent -= 2
+		nodes["stairs"].step()
+	
+	# shift ladder to imitate movement
+	nodes["stairs"].transform.origin = Vector3(0, 1, 1) * tangent
 	
 	var dist = pow(transform.origin.y, 2) + pow(transform.origin.z, 2)
 	

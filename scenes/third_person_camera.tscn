@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://env.tres" type="Environment" id=1]
 [ext_resource path="res://scenes/third_person_camera.gd" type="Script" id=2]
 
 [node name="camera_root" type="Spatial"]
@@ -11,5 +10,4 @@ script = ExtResource( 2 )
 
 [node name="viewport" type="Camera" parent="camera_pitch"]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -10, 0, 0 )
-environment = ExtResource( 1 )
 fov = 90.0

@@ -42,8 +42,7 @@ func _ready():
 	$title.hide()
 
 func _process(delta):
-	# shift ladder to imitate movement
-	$stairs_root.transform.origin = Vector3(0, 1, 1) * $player_root.tangent
+	pass
 
 # handle player input
 func _input(event):
@@ -81,12 +80,16 @@ func assign_props(node):
 				node.nodes[needs] = random
 			elif needs == "snd":
 				node.nodes[needs] = $player
+			elif needs == "stairs":
+				node.nodes[needs] = $stairs_root
 	
 	for child in node.get_children():
 		assign_props(child)
 
 func set_environment(environment):
 	$stairs_root.set_stairs_material(load("res://assets/materials/stairs" + environment + ".tres"))
+	
+	$env.switch_to(environment)
 
 func play_hit_sound():
 	if (sounds.size() != 0) && enable_sounds:
